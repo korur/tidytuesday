@@ -1,0 +1,66 @@
+---
+title: "Analysis_big_cars_epa"
+author: "Serdar Korur"
+date: "10/21/2019"
+output: html_document
+---
+```{r import packages & data}
+library(tidyverse) # ggplot2, dplyr, tidyr, readr, 
+                   # purrr, tibble, stringr, forcats
+big_epa_cars <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-10-15/big_epa_cars.csv")
+big_epa_cars %>% View()
+
+# Make it alphebeticall like in data dictionary
+big_epa_cars_alp <- big_epa_cars %>% select(sort(colnames(big_epa_cars)))
+big_epa_cars_alp %>%  view()
+
+# Check the columns
+big_epa_cars_alp %>% count(atvType, sort =TRUE)
+```
+
+
+```{r size of the data}
+# Dimension of the data
+dim(big_epa_cars)
+names(big_epa_cars)
+str(big_epa_cars)
+```
+
+
+```{r examine data}
+# Examine single columns
+big_epa_cars %>% select(fuelType) %>% table()
+big_epa_cars %>% select(trany) %>% table()
+big_epa_cars %>% select(lv4) %>% table()
+
+# Evolutuion of Automatic vs Manual cars
+
+# Plot fueltype evolution in years
+# check 2d box plot (weight by n)
+p <- ggplot(big_epa_cars, aes(x=fuelType, y =year)) + geom_point() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+p
+```
+
+# Premium fuel cars dominate after 2000 and after 2010 Electric cars start to get popular
+```{r examine data}
+# Using Varwidth
+p <- ggplot(big_epa_cars, aes(x=fuelType, y =year)) + geom_boxplot(varwidth=TRUE) + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + coord_flip()
+p
+```
+
+
+
+```{r check out those}
+# Checking out
+fct_reorder()    ---forcats package
+fct_lump() ?
+coord_flip
+
+```
+
+
+**tidy:** constructs a data frame that summarizes the model’s statistical findings. This includes coefficients and p-values for each term in a regression, per-cluster information in clustering applications, or per-test information for multtest functions.
+
+**augment:** add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.
+
+**glance:** construct a concise one-row summary of the model. This typically contains values such as R^2, adjusted R^2, and residual standard error that are computed once for the entire model.
