@@ -36,25 +36,34 @@ big_epa_cars %>% select(lv4) %>% table()
 # Evolutuion of Automatic vs Manual cars
 
 # Plot fueltype evolution in years
-# check 2d box plot (weight by n)
 p <- ggplot(big_epa_cars, aes(x=fuelType, y =year)) + geom_point() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 p
 ```
 
-# Premium fuel cars dominate after 2000 and after 2010 Electric cars start to get popular
+Diesel & Regular engine cars had their peak at 1990s, Premium fuel cars 2008v666AZ and Electric cars start emerging their popularity after 2010.
+
 ```{r examine data}
 # Using Varwidth
 p <- ggplot(big_epa_cars, aes(x=fuelType, y =year)) + geom_boxplot(varwidth=TRUE) + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + coord_flip()
 p
+
+# Using Varwidth: Ordered
+pp  <- big_epa_cars %>% mutate(fuelType=fct_reorder(fuelType, year)) %>% ggplot(aes(x=fuelType, y =year, fill=fuelType)) + geom_boxplot(varwidth=TRUE) + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + coord_flip()
+pp
+
+
+# Grouped: Electric vs no electric: Ordered
+
+ifelse(rowname %in% c())
 ```
 
 
 
 ```{r check out those}
 # Checking out
-fct_reorder()    ---forcats package
-fct_lump() ?
-coord_flip
+# fct_reorder()    ---forcats package
+# fct_lump() ?
+# coord_flip
 
 ```
 
