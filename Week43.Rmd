@@ -268,6 +268,218 @@ horror_date_table %>%
     theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=11), axis.text.y=element_blank())
 
 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "#da1818"),    axis.text.x =element_text(vjust=12, size=17,colour="red")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n),size=5, fill="yellow", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=11), axis.text.y=element_blank())+ geom_vline(x=                          mean(horror_date_table$n))
+
+
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "#da1818"),    axis.text.x =element_text(vjust=12, size=17,colour="red")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n),size=5, fill="yellow", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=11), axis.text.y=element_blank())+ geom_hline(yintercept=mean(horror_date_table$n), color="red", size=2, lty=2, alpha=0.8)                                                                                                                                                                                                                  horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "black"),    axis.text.x =element_text(vjust=12, size=17,colour="red"), panel.background = element_rect(fill = "pink"), plot.background = element_rect(fill = "pink"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=11), axis.text.y=element_blank()) + geom_hline(yintercept=mean(horror_date_table$n), color="red", size=2, lty=2, alpha=0.8) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n),size=5, fill="yellow", alpha=0.9)
+
+
+#final
+
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "#40E0D0"),    axis.text.x =element_text(vjust=12, size=17,colour="white", face="bold")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n),size=5, fill="white", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "#40E0D0"), axis.title.x = element_text(vjust=11), axis.text.y=element_blank())
+
+#final
+
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "black"),    axis.text.x =element_text(vjust=12, size=17,colour="white", face="bold")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n),size=5, fill="white", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "white"), plot.background = element_rect(fill = "white"), panel.grid = element_blank(), title = element_text(color = "black"), axis.title.x = element_text(vjust=11), axis.text.y=element_blank())
+```
+
+
+```{r Final plots in GIF}
+
+# Final
+
+p <- list()
+title <- expression(paste("When the topic is ", bold("Horror"))
+subtitle <- expression(paste(bold("The 13th gets lucky")))
+
+p[[1]] <- horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(
+      plot.title = element_text(size=24, color= "black", hjust=0.5, vjust = -1),
+      plot.subtitle = element_text(size=36, color= "red", hjust=0.5, vjust = -1),
+      panel.background = element_rect(fill = "white"), 
+      plot.background = element_rect(fill = "white"),
+      panel.grid = element_blank(),
+      legend.position = "none", 
+      text = element_text(size=18), 
+      axis.text.x =element_text(vjust=12, size=17, colour= "white", face= "bold"),
+      axis.title.x = element_text(vjust=11), 
+      axis.text.y=element_blank(),
+      axis.ticks= element_blank(), 
+      plot.caption = element_text(hjust = 1, vjust = 10)) + 
+    labs(
+          caption= "Source: IMDb, Plot: @dataatomic",
+          x = "Day of the Month", 
+          y = "Number of movies released",
+          title = title, 
+          subtitle=subtitle) +
+    geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
+
+
+p[[2]] <- horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =1) + 
+    theme(
+      plot.title = element_text(size=24, color= "black", hjust=0.5, vjust = -1),
+      plot.subtitle = element_text(size=36, color= "red", hjust=0.5, vjust = -1),
+      panel.background = element_rect(fill = "white"), 
+      plot.background = element_rect(fill = "white"),
+      panel.grid = element_blank(),
+      legend.position = "none", 
+      text = element_text(size=18), 
+      axis.text.x =element_text(vjust=12, size=17, colour= "white", face= "bold"),
+      axis.title.x = element_text(vjust=11), 
+      axis.text.y=element_blank(),
+      axis.ticks= element_blank(), 
+      plot.caption = element_text(hjust = 1, vjust = 10)) + 
+    labs(
+          caption= "Source: IMDb, Plot: @dataatomic",
+          x = "Day of the Month", 
+          y = "Number of movies released",
+          title = title, 
+          subtitle=subtitle) +
+    geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
+
+
+
+p[[3]] <- horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( option="magma", direction = -1) + 
+    theme(
+      plot.title = element_text(size=24, color= "black", hjust=0.5, vjust = -1),
+      plot.subtitle = element_text(size=36, color= "red", hjust=0.5, vjust = -1),
+      panel.background = element_rect(fill = "white"), 
+      plot.background = element_rect(fill = "white"),
+      panel.grid = element_blank(),
+      legend.position = "none", 
+      text = element_text(size=18), 
+      axis.text.x =element_text(vjust=12, size=17, colour= "white", face= "bold"),
+      axis.title.x = element_text(vjust=11), 
+      axis.text.y=element_blank(),
+      axis.ticks= element_blank(), 
+      plot.caption = element_text(hjust = 1, vjust = 10)) + 
+    labs(
+         caption= "Source: IMDb, Plot: @dataatomic",
+          x = "Day of the Month", 
+          y = "Number of movies released",
+          title = title, 
+          subtitle=subtitle) +
+    geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
+  
+p[[4]] <- horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( option="magma", direction = -1) + 
+    theme(
+      plot.title = element_text(size=24, color= "black", hjust=0.5, vjust = -1),
+      plot.subtitle = element_text(size=36, color= "red", hjust=0.5, vjust = -1),
+      panel.background = element_rect(fill = "white"), 
+      plot.background = element_rect(fill = "white"),
+      panel.grid = element_blank(),
+      legend.position = "none", 
+      text = element_text(size=18), 
+      axis.text.x =element_text(vjust=12, size=17, colour= "white", face= "bold"),
+      axis.title.x = element_text(vjust=11), 
+      axis.text.y=element_blank(),
+      axis.ticks= element_blank(), 
+      plot.caption = element_text(hjust = 1, vjust = 10)) + 
+    labs(
+          caption= "Source: IMDb, Plot: @dataatomic",
+          x = "Day of the Month", 
+          y = "Number of movies released",
+          title = title, 
+          subtitle=subtitle) +
+    geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9)   
+  
+
+p[[5]] <- horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(
+      plot.title = element_text(size=24, color= "black", hjust=0.5, vjust = -1),
+      plot.subtitle = element_text(size=36, color= "red", hjust=0.5, vjust = -1),
+      panel.background = element_rect(fill = "white"), 
+      plot.background = element_rect(fill = "white"),
+      panel.grid = element_blank(),
+      legend.position = "none", 
+      text = element_text(size=18), 
+      axis.text.x =element_text(vjust=12, size=17, colour= "white", face= "bold"),
+      axis.title.x = element_text(vjust=11), 
+      axis.text.y=element_blank(),
+      axis.ticks= element_blank(), 
+      plot.caption = element_text(hjust = 1, vjust = 10)) + 
+    labs(
+          caption= "Source: IMDb, Plot: @dataatomic",
+          x = "Day of the Month", 
+          y = "Number of movies released",
+          title = title, 
+          subtitle=subtitle) +
+    geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
+
+
+saveGIF({
+    for(i in 1:5) plot(p[[i]])
+},movie.name = "horror_movies.gif", interval = 0.25, nmax = 30, 
+ani.width = 800)
 
 ```
 
