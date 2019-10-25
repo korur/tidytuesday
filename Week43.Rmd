@@ -1,0 +1,276 @@
+---
+title: "horror_movies"
+author: "Serdar Korur"
+date: "10/25/2019"
+output: html_document
+---
+
+```{r}
+horror_movies <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-10-22/horror_movies.csv")
+
+dim(horror_movies)
+
+horror_movies %>% view()
+
+horror_date <-  horror_movies %>% separate(release_date, c("day", "month", "year"), sep = "-")
+
+horror_date$day <- as.numeric(horror_date$day)
+horror_date <- horror_date %>% filter(day < 32) 
+horror_date_table <- horror_date_table %>% filter(day >1)
+
+# 13th of each is the most likely relaease date for horror movies after classic first
+horror_date_table %>% ggplot(aes(x=day, y=n)) +
+    geom_line(aes(color=day), alpha = 0.5, size =1) +  geom_point(aes(color = day), size= 4, show.legend = FALSE) +
+    scale_x_continuous(breaks =  seq( min(horror_date_table$day), max(horror_date_table$day), by = 2) ) +
+  scale_color_gradientn(colours=c("yellow", "red", "brick", "blue"))
+
+
+# 13th of each is the most likely relaease date for horror movies after classic first: bar graph
+horror_date_table$day <- as.character(horror_date_table$day)
+
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis(direction = -1) + theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32)) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = "When the topic is Horror 13th gets lucky")+
+    theme_classic()
+
+# v2 13th of each is the most likely relaease date for horror movies after classic first: bar graph
+horror_date_table$day <- as.character(horror_date_table$day)
+title <- expression(paste("When the topic is Horror", bold(" 13th"), " gets lucky"))
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis(direction = -1) + theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32)) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title)
+
+# v3 13th of each is the most likely relaease date for horror movies after classic first: bar graph
+horror_date_table$day <- as.character(horror_date_table$day)
+title <- expression(paste("When the topic is Horror", bold(" 13th"), " gets lucky"))
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis(direction = -1) + theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32), axis.text.x =element_text(vjust=1, colour="red") + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title)
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph    
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(direction = -1) + theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32), axis.text.x =element_text(vjust=8.6, colour="black")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +geom_label(aes(label = n), alpha=0.9) + theme(panel.background = element_rect(fill = "red"), panel.grid = element_blank())
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph    
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(direction = -1) + theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32), axis.text.x =element_text(vjust=8.6, colour="black")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +geom_label(aes(label = n), alpha=0.9) + theme(panel.background = element_rect(fill = "red"), panel.grid = element_blank())
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph   
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(direction = -1) + theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32), axis.text.x =element_text(vjust=8.6, colour="black")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +geom_label(aes(label = n), alpha=0.9) + theme(panel.background = element_rect(fill = "red"), plot.background = element_rect(fill = "red"), panel.grid = element_blank())
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph  
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(direction = -1) + theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32), axis.text.x =element_text(vjust=8.6, colour="black")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +geom_label(aes(label = n), alpha=0.9) + theme(panel.background = element_rect(fill = "red"), plot.background = element_rect(fill = "red"), panel.grid = element_blank(), title = element_text(color = "white"))
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph  
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(direction = -1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "red"), plot.background = element_rect(fill = "red"), panel.grid = element_blank(), title = element_text(color = "white"))
+                                     
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph  
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(direction = -1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"))      
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph  
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(option="magma", direction = 1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"))  
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph  
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(option="plasma", direction = -1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"))  
+
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph  
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n), position=position_dodge(width=2)) +
+    scale_fill_viridis(direction = -1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"))  
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis(option="inferno", direction = 1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white")) 
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis(option="inferno", direction = 1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+   theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=6))
+
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis(option="inferno", direction = 1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+   theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=6))
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies Released", title = title) +
+    geom_label(aes(label = n), alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=6), axis.text.y=element_blank())
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph # v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n), fill="green", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=6), axis.text.y=element_blank())
+
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n), fill="yellow", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=6), axis.text.y=element_blank())
+
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "red"),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n), fill="yellow", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=6), axis.text.y=element_blank())
+
+# v4 13th of each is the most likely relaease date for horror movies after classic first: bar graph 
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "red"),    axis.text.x =element_text(vjust=8.6, colour="white")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n),size=5,  fill="yellow", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=6), axis.text.y=element_blank())
+
+
+horror_date_table %>% 
+    ungroup() %>% 
+    mutate(day=fct_reorder(day, n, .desc=TRUE)) %>% 
+    ggplot(aes(x=day, y=n)) +
+    geom_col(aes(fill=n)) +
+    scale_fill_viridis( direction =-1) + 
+    theme(legend.position = "none", text = element_text(size=18), plot.title = element_text(size=32, color= "#da1818"),    axis.text.x =element_text(vjust=12, size=17,colour="red")) + 
+    labs(x = "Day of the Month", y = "Number of movies released", title = title) +
+    geom_label(aes(label = n),size=5, fill="yellow", alpha=0.9) + 
+    theme(panel.background = element_rect(fill = "black"), plot.background = element_rect(fill = "black"), panel.grid = element_blank(), title = element_text(color = "white"), axis.title.x = element_text(vjust=11), axis.text.y=element_blank())
+
+
+
+```
+
+
+
+
