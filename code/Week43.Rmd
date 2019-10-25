@@ -8,7 +8,7 @@ output: html_document
 ```{r Install packages}
 library(tidyverse) # ggplot2, dplyr, tidyr, readr, 
                    # purrr, tibble, stringr, forcats
-library(gganimate)
+library(animation)
 library(viridis)
 ```
 
@@ -48,9 +48,12 @@ horror_date_table <-  horror_date_table %>%
 
 # Final
 horror_date_table$day <- as.character(horror_date_table$day)
+
 p <- list()
-title <- expression(paste("When the topic is ", bold("Horror"))
-subtitle <- expression(paste(bold("The 13th gets lucky")))
+
+my_title <- "When the topic is Horror"
+
+my_subtitle <- "The 13th gets lucky"
 
 p[[1]] <- horror_date_table %>% 
     ungroup() %>% 
@@ -75,8 +78,8 @@ p[[1]] <- horror_date_table %>%
           caption= "Source: IMDb, Plot: @dataatomic",
           x = "Day of the Month", 
           y = "Number of movies released",
-          title = title, 
-          subtitle=subtitle) +
+          title = my_title, 
+          subtitle=my_subtitle) +
     geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
 
 
@@ -103,8 +106,8 @@ p[[2]] <- horror_date_table %>%
           caption= "Source: IMDb, Plot: @dataatomic",
           x = "Day of the Month", 
           y = "Number of movies released",
-          title = title, 
-          subtitle=subtitle) +
+          title = my_title, 
+          subtitle=my_subtitle) +
     geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
 
 
@@ -132,8 +135,8 @@ p[[3]] <- horror_date_table %>%
          caption= "Source: IMDb, Plot: @dataatomic",
           x = "Day of the Month", 
           y = "Number of movies released",
-          title = title, 
-          subtitle=subtitle) +
+          title = my_title, 
+          subtitle=my_subtitle) +
     geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
   
 p[[4]] <- horror_date_table %>% 
@@ -159,8 +162,8 @@ p[[4]] <- horror_date_table %>%
           caption= "Source: IMDb, Plot: @dataatomic",
           x = "Day of the Month", 
           y = "Number of movies released",
-          title = title, 
-          subtitle=subtitle) +
+          title = my_title, 
+          subtitle=my_subtitle) +
     geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9)   
   
 
@@ -187,8 +190,8 @@ p[[5]] <- horror_date_table %>%
           caption= "Source: IMDb, Plot: @dataatomic",
           x = "Day of the Month", 
           y = "Number of movies released",
-          title = title, 
-          subtitle=subtitle) +
+          title = my_title, 
+          subtitle=my_subtitle) +
     geom_label(aes(label = n), size=5, fill="yellow", alpha=0.9) 
 
 
