@@ -1,7 +1,9 @@
 # tidytuesday
 Repo for TidyTuesday Data Analyses. 
 
-Week 1: Car Fuel Economy Data Set    
-   
---> code at > https://korur.github.io/tidytuesday/    
+all codes --> https://github.com/korur/tidytuesday/tree/master/code
+
+Week 42: Car Fuel Economy Data Set    
 --> Full story > https://dataatomic.com/r/tidytuesday-which-are-the-best-family-cars/      
+
+Week 43: Horror Movies IMDb Data Set  
